@@ -1,12 +1,16 @@
 package factory
 
+//Truck Struct is a type of vehicle so we use composition to inject vehicle attributes into truck.
 type Truck struct {
 	Vehicle
 }
 
-func (truck *Truck) GetStatus() string {
+//GetStatus returns Moving status of the truck.
+func (truck *Truck) GetMovingStatus() string {
 	return truck.Vehicle.status
 }
+
+//String returns information of the truck as a text.
 func (truck *Truck) String() string {
 	return "truck " + truck.Vehicle.brand + " " + truck.Vehicle.color + " " + truck.Vehicle.model + " " + truck.Vehicle.status
 }
