@@ -9,6 +9,7 @@ import (
 	"./creational/factory"
 	"./creational/singleton"
 	"./structural/adapter"
+	"./structural/facade"
 
 	"github.com/google/uuid"
 )
@@ -19,28 +20,14 @@ func main() {
 	createObjectInstanceWithSingletonPattern()
 
 	adaptSparrowAndToyDuckWithAdapterPattern()
+	getMenuFromMultiResturantWithFacadePattern()
 
 }
 
-func adaptSparrowAndToyDuckWithAdapterPattern() {
-	fmt.Println("--------Adapter Results ---------")
-	sparrow := adapter.Sparrow{}
-	toyDuck := adapter.PlasticToyDuck{}
+func getMenuFromMultiResturantWithFacadePattern() {
 
-	// Wrap a bird in a birdAdapter so that it
-	// behaves like toy duck
-	birdAdapter := adapter.BirdAdapter{}
-
-	fmt.Println("Sparrow...")
-	sparrow.Fly()
-	sparrow.MakeSound()
-	fmt.Println("ToyDuck...")
-	toyDuck.Squeak()
-
-	// toy duck behaving like a bird
-	fmt.Println("BirdAdapter...")
-	birdAdapter.Squeak()
-	fmt.Println("---------------------------------")
+	fmt.Println("Vegetarian Restaurant Menu: ", facade.GetVegMenu())
+	fmt.Println("Non Vegetarian Restaurant Menu: ", facade.GetNonVegMenu())
 }
 
 func createObjectWithBuilderPattern() {
@@ -59,7 +46,6 @@ func createObjectWithBuilderPattern() {
 	fmt.Printf("object: %+v | err: %v \n", object, err)
 	fmt.Println("---------------------------------")
 }
-
 func createObjectWithFactoryPattern() {
 	fmt.Println("-------Factory Results ----------")
 	car, _ := factory.NewVehicle("car", "BMW", "black", "M240i xDrive Coupe")
@@ -98,5 +84,24 @@ func createObjectInstanceWithSingletonPattern() {
 
 		}
 	}
+}
+func adaptSparrowAndToyDuckWithAdapterPattern() {
+	fmt.Println("--------Adapter Results ---------")
+	sparrow := adapter.Sparrow{}
+	toyDuck := adapter.PlasticToyDuck{}
 
+	// Wrap a bird in a birdAdapter so that it
+	// behaves like toy duck
+	birdAdapter := adapter.BirdAdapter{}
+
+	fmt.Println("Sparrow...")
+	sparrow.Fly()
+	sparrow.MakeSound()
+	fmt.Println("ToyDuck...")
+	toyDuck.Squeak()
+
+	// toy duck behaving like a bird
+	fmt.Println("BirdAdapter...")
+	birdAdapter.Squeak()
+	fmt.Println("---------------------------------")
 }
