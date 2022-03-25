@@ -8,6 +8,8 @@ import (
 	"./creational/builder"
 	"./creational/factory"
 	"./creational/singleton"
+	"./structural/adapter"
+
 	"github.com/google/uuid"
 )
 
@@ -15,6 +17,30 @@ func main() {
 	createObjectWithBuilderPattern()
 	createObjectWithFactoryPattern()
 	createObjectInstanceWithSingletonPattern()
+
+	adaptSparrowAndToyDuckWithAdapterPattern()
+
+}
+
+func adaptSparrowAndToyDuckWithAdapterPattern() {
+	fmt.Println("--------Adapter Results ---------")
+	sparrow := adapter.Sparrow{}
+	toyDuck := adapter.PlasticToyDuck{}
+
+	// Wrap a bird in a birdAdapter so that it
+	// behaves like toy duck
+	birdAdapter := adapter.BirdAdapter{}
+
+	fmt.Println("Sparrow...")
+	sparrow.Fly()
+	sparrow.MakeSound()
+	fmt.Println("ToyDuck...")
+	toyDuck.Squeak()
+
+	// toy duck behaving like a bird
+	fmt.Println("BirdAdapter...")
+	birdAdapter.Squeak()
+	fmt.Println("---------------------------------")
 }
 
 func createObjectWithBuilderPattern() {
@@ -56,7 +82,6 @@ func createObjectInstanceWithSingletonPattern() {
 			channel <- " Loop Number: " + strconv.Itoa(i) + " , ID: " + singletonObject.GetID().String()
 		}(i)
 	}
-	fmt.Println("---------------------------------")
 	for {
 		select {
 		case message, status := <-channel:
@@ -67,9 +92,11 @@ func createObjectInstanceWithSingletonPattern() {
 					close(channel)
 				}
 			} else {
+				fmt.Println("---------------------------------")
 				return
 			}
 
 		}
 	}
+
 }
