@@ -23,16 +23,20 @@ components. While not mandatory, most 'observers' implementations would use back
 listening for subject-events and other support mechanisms provided by the kernel (Linux epoll, ...).
 refrence: https://en.wikipedia.org/wiki/Observer_pattern
 */
-
+//ObserverInterface determines what functions Observers have to have.
 type ObserverInterface interface {
-	onUpdate(ProductPrice)
+	onUpdate(Product)
 }
+
+//Observer represent a observer that we let him know Updates.
 type Observer struct {
 	id   uuid.UUID
 	name string
-	data map[uuid.UUID]ProductPrice
+	data map[uuid.UUID]Product
 }
-type ProductPrice struct {
+
+//Product represent a observer that we let him know Updates.
+type Product struct {
 	ID    uuid.UUID
 	Name  string
 	Price int
@@ -41,19 +45,19 @@ type ProductPrice struct {
 func (observer *Observer) SetName(name string) {
 	observer.name = name
 	observer.id, _ = uuid.NewUUID()
-	observer.data = make(map[uuid.UUID]ProductPrice)
+	observer.data = make(map[uuid.UUID]Product)
 }
 
-func (observer *Observer) onUpdate(productPrice ProductPrice) {
-	product, exists := observer.data[productPrice.ID]
-	observer.data[productPrice.ID] = productPrice
+func (observer *Observer) onUpdate(product Product) {
+	product, exists := observer.data[product.ID]
+	observer.data[product.ID] = product
 
 	//to see result
 	if exists {
-		fmt.Println(observer.name + " , got update price for " + productPrice.Name +
-			" from " + strconv.Itoa(product.Price) + " to " + strconv.Itoa(productPrice.Price))
+		fmt.Println(observer.name + " , got update price for " + product.Name +
+			" from " + strconv.Itoa(product.Price) + " to " + strconv.Itoa(product.Price))
 	} else {
-		fmt.Println(observer.name + " , got " + productPrice.Name +
-			" with price " + strconv.Itoa(productPrice.Price))
+		fmt.Println(observer.name + " , got " + product.Name +
+			" with price " + strconv.Itoa(product.Price))
 	}
 }

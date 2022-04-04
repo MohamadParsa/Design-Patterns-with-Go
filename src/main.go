@@ -27,27 +27,6 @@ func main() {
 	updateAllClientsWithObserverPattern()
 }
 
-func updateAllClientsWithObserverPattern() {
-	fmt.Println("--------Observer Results ---------")
-	subject := observer.Subject{Observers: make(map[uuid.UUID]*observer.Observer)}
-	observer1 := &observer.Observer{}
-	observer1.SetName("Tom")
-	subject.RegisterOnObserveList(observer1)
-	observer2 := &observer.Observer{}
-	observer2.SetName("Niki")
-	subject.RegisterOnObserveList(observer2)
-
-	milk := subject.NewProduct("Milk", 2)
-	meat := subject.NewProduct("meat", 19)
-
-	subject.Updateall(milk)
-	subject.Updateall(meat)
-	milk.Price = 1
-	subject.Updateall(milk)
-	subject.RemoveFromObserveList(observer2)
-	fmt.Println("---------------------------------")
-}
-
 func createObjectWithBuilderPattern() {
 	fmt.Println("--------Builder Results ---------")
 	objectBuilder := builder.NewObjectBuilder()
@@ -128,5 +107,25 @@ func getMenuFromMultiResturantWithFacadePattern() {
 
 	fmt.Println("Vegetarian Restaurant Menu: ", facade.GetVegMenu())
 	fmt.Println("Non Vegetarian Restaurant Menu: ", facade.GetNonVegMenu())
+	fmt.Println("---------------------------------")
+}
+func updateAllClientsWithObserverPattern() {
+	fmt.Println("--------Observer Results ---------")
+	subject := observer.Subject{Observers: make(map[uuid.UUID]*observer.Observer)}
+	observer1 := &observer.Observer{}
+	observer1.SetName("Tom")
+	subject.RegisterOnObserveList(observer1)
+	observer2 := &observer.Observer{}
+	observer2.SetName("Niki")
+	subject.RegisterOnObserveList(observer2)
+
+	milk := subject.NewProduct("Milk", 2)
+	meat := subject.NewProduct("meat", 19)
+
+	subject.Updateall(milk)
+	subject.Updateall(meat)
+	milk.Price = 1
+	subject.Updateall(milk)
+	subject.RemoveFromObserveList(observer2)
 	fmt.Println("---------------------------------")
 }

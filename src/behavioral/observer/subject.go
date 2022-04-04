@@ -9,7 +9,7 @@ import (
 type SubjectInterface interface {
 	RegisterOnObserveList(*Observer)
 	RemoveFromObserveList(*Observer)
-	Updateall(ProductPrice)
+	Updateall(Product)
 }
 
 type Subject struct {
@@ -24,12 +24,12 @@ func (subject *Subject) RemoveFromObserveList(observer *Observer) {
 	fmt.Println(observer.name + " removed.")
 	delete(subject.Observers, observer.id)
 }
-func (subject *Subject) Updateall(productPrice ProductPrice) {
+func (subject *Subject) Updateall(product Product) {
 	for _, observer := range subject.Observers {
-		observer.onUpdate(productPrice)
+		observer.onUpdate(product)
 	}
 }
-func (subject *Subject) NewProduct(name string, price int) ProductPrice {
+func (subject *Subject) NewProduct(name string, price int) Product {
 	id, _ := uuid.NewUUID()
-	return ProductPrice{ID: id, Name: name, Price: price}
+	return Product{ID: id, Name: name, Price: price}
 }
