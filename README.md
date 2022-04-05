@@ -19,3 +19,8 @@ creational:
     
     . facade
     
+  behavioral:
+  
+    . iterator
+    
+    . observer
