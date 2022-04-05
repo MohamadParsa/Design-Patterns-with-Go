@@ -5,6 +5,7 @@ import (
 
 	"strconv"
 
+	"./behavioral/iterator"
 	"./behavioral/observer"
 	"./creational/builder"
 	"./creational/factory"
@@ -25,6 +26,8 @@ func main() {
 	getMenuFromMultiResturantWithFacadePattern()
 	//calling Structural Patterns examples.
 	updateAllClientsWithObserverPattern()
+	iterateAllItemsWithIteratorPattern()
+
 }
 
 func createObjectWithBuilderPattern() {
@@ -127,5 +130,30 @@ func updateAllClientsWithObserverPattern() {
 	milk.Price = 1
 	subject.Updateall(milk)
 	subject.RemoveFromObserveList(observer2)
+	fmt.Println("---------------------------------")
+}
+func iterateAllItemsWithIteratorPattern() {
+	fmt.Println("--------Iterator Results ---------")
+	bookCollection := iterator.Library{}
+	book := iterator.Book{BookName: "Learning Go: An Idiomatic Approach to Real‑World Go", Author: "Jon Bodner"}
+	bookCollection.AddBook(book)
+	book = iterator.Book{BookName: "Jon Bodner", Author: "A. A. Donovan and Brian Kernighan"}
+	bookCollection.AddBook(book)
+
+	bookIterator := bookCollection.GetCollection()
+	fmt.Println("Has next?             ->", bookIterator.HasNext())
+	fmt.Println("So, What is next?     ->", bookIterator.Next())
+
+	fmt.Println("Has next?             ->", bookIterator.HasNext())
+	fmt.Println("So, What is next?     ->", bookIterator.Next())
+
+	fmt.Println("Has next?             ->", bookIterator.HasNext())
+	fmt.Println("So, What is next?     ->", bookIterator.Next())
+
+	fmt.Println("Has previous?         ->", bookIterator.HasPrevious())
+	fmt.Println("So, What is previous? ->", bookIterator.Previous())
+
+	fmt.Println("Has previous?         ->", bookIterator.HasPrevious())
+	fmt.Println("So, What is previous? ->", bookIterator.Previous())
 	fmt.Println("---------------------------------")
 }
