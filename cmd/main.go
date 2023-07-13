@@ -5,6 +5,7 @@ import (
 
 	"github.com/MohamadParsa/Design-Patterns-with-Go/behavioral/iterator"
 	"github.com/MohamadParsa/Design-Patterns-with-Go/behavioral/observer"
+	"github.com/MohamadParsa/Design-Patterns-with-Go/creational/abstract_factory"
 	"github.com/MohamadParsa/Design-Patterns-with-Go/creational/builder"
 	"github.com/MohamadParsa/Design-Patterns-with-Go/creational/factory"
 	"github.com/MohamadParsa/Design-Patterns-with-Go/creational/singleton"
@@ -20,6 +21,7 @@ func main() {
 	//calling Creational Patterns examples.
 	createObjectWithBuilderPattern()
 	createObjectWithFactoryPattern()
+	createObjectWithAbstractFactoryPattern()
 	createObjectInstanceWithSingletonPattern()
 	//calling Structural Patterns examples.
 	adaptSparrowAndToyDuckWithAdapterPattern()
@@ -55,6 +57,23 @@ func createObjectWithFactoryPattern() {
 	car.Stop()
 	fmt.Printf("object: %v  \n", car.String())
 	fmt.Printf("object: %v  \n", truck.String())
+	fmt.Println("---------------------------------")
+}
+func createObjectWithAbstractFactoryPattern() {
+	fmt.Println("-------Abstract Factory Results ----------")
+	economic, _ := abstract_factory.GetReservationFactory("economic")
+	expensive, _ := abstract_factory.GetReservationFactory("expensive")
+
+	economicHotel := economic.CreateHotel()
+	economicTransport := economic.CreateTransport()
+
+	expensiveHotel := expensive.CreateHotel()
+	expensiveTransport := expensive.CreateTransport()
+
+	fmt.Printf("economic hotel address : %v , equipment: %v \n", economicHotel.GetAddress(), economicHotel.GetEquipment())
+	fmt.Printf("expensive hotel address : %v , equipment: %v \n", expensiveHotel.GetAddress(), expensiveHotel.GetEquipment())
+	fmt.Printf("economic transport address : %v , service: %v \n", economicTransport.GetTransportType(), economicTransport.GetService())
+	fmt.Printf("expensive transport address : %v , service: %v \n", expensiveTransport.GetTransportType(), expensiveTransport.GetService())
 	fmt.Println("---------------------------------")
 }
 func createObjectInstanceWithSingletonPattern() {

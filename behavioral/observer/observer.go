@@ -1,4 +1,4 @@
-//Package observer is an implementation of observer pattern in Go
+// Package observer is an implementation of observer pattern in Go
 package observer
 
 import (
@@ -21,21 +21,21 @@ GPIO data, user input from keyboard/mouse/..., distributed databases and blockch
 modern programming-languages comprise built-in "event" constructs implementing the observer-pattern
 components. While not mandatory, most 'observers' implementations would use background threads
 listening for subject-events and other support mechanisms provided by the kernel (Linux epoll, ...).
-refrence: https://en.wikipedia.org/wiki/Observer_pattern
+reference: https://en.wikipedia.org/wiki/Observer_pattern
 */
 //ObserverInterface determines what functions Observers have to have.
 type ObserverInterface interface {
 	onUpdate(Product)
 }
 
-//Observer represent a observer that we let him know Updates.
+// Observer represent a observer that we let him know Updates.
 type Observer struct {
 	id   uuid.UUID
 	name string
 	data map[uuid.UUID]Product
 }
 
-//Product represent a observer that we let him know Updates.
+// Product represent a observer that we let him know Updates.
 type Product struct {
 	ID    uuid.UUID
 	Name  string

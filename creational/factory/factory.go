@@ -1,4 +1,4 @@
-//Package factory is an implementation of factory pattern in Go
+// Package factory is an implementation of factory pattern in Go
 package factory
 
 import "errors"
@@ -11,15 +11,15 @@ hiding the details of class modules from the user.
 A factory pattern is one of the core design principles to create an object, allowing clients to
 create objects of a library(explained below) in a way such that it doesn’t have tight coupling with
 the class hierarchy of the library.
-refrence: https://www.geeksforgeeks.org/design-patterns-set-2-factory-method/
+reference: https://www.geeksforgeeks.org/design-patterns-set-2-factory-method/
 */
 
-//all returned errors defined to use in test.
+// all returned errors defined to use in test.
 var (
 	errorVehicleTypeIsInvalid = errors.New("vehicleType is invalid")
 )
 
-//factory method to return object.
+// factory method to return object.
 func NewVehicle(vehicleType, brand, color, model string) (VehicleInterface, error) {
 	if vehicleType == "car" {
 		return newCar(brand, color, model), nil
