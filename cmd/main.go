@@ -8,6 +8,7 @@ import (
 	"github.com/MohamadParsa/Design-Patterns-with-Go/creational/abstract_factory"
 	"github.com/MohamadParsa/Design-Patterns-with-Go/creational/builder"
 	"github.com/MohamadParsa/Design-Patterns-with-Go/creational/factory"
+	"github.com/MohamadParsa/Design-Patterns-with-Go/creational/prototype"
 	"github.com/MohamadParsa/Design-Patterns-with-Go/creational/singleton"
 	"github.com/MohamadParsa/Design-Patterns-with-Go/structural/adapter"
 	"github.com/MohamadParsa/Design-Patterns-with-Go/structural/facade"
@@ -23,6 +24,7 @@ func main() {
 	createObjectWithFactoryPattern()
 	createObjectWithAbstractFactoryPattern()
 	createObjectInstanceWithSingletonPattern()
+	createObjectInstanceWithPrototypePattern()
 	//calling Structural Patterns examples.
 	adaptSparrowAndToyDuckWithAdapterPattern()
 	getMenuFromMultiResturantWithFacadePattern()
@@ -103,6 +105,25 @@ func createObjectInstanceWithSingletonPattern() {
 
 		}
 	}
+}
+func createObjectInstanceWithPrototypePattern() {
+	fmt.Println("-------Prototype Results --------")
+	transaction1 := &prototype.Transaction{Sender: "sender1", Recipient: "recipient1", Amount: 10}
+	transaction2 := &prototype.Transaction{Sender: "sender2", Recipient: "recipient2", Amount: 20}
+	transaction3 := &prototype.Transaction{Sender: "sender3", Recipient: "recipient3", Amount: 30}
+
+	block := &prototype.Block{
+		TransactionList: []prototype.Prototype{transaction1, transaction2, transaction3},
+		PreviousHash:    "previousHash1",
+	}
+	fmt.Println(" main block:\n", block)
+	fmt.Println("---")
+
+	newBlock := block.Clone()
+	fmt.Println(" cloned block:\n", newBlock)
+
+	fmt.Println("---------------------------------")
+
 }
 func adaptSparrowAndToyDuckWithAdapterPattern() {
 	fmt.Println("--------Adapter Results ---------")
